@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    项目
+    <!-- 项目 -->
+    {{$t('home')}}
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
   </div>

@@ -2,7 +2,8 @@
   <div id="web">
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
-    {{ $t("messages.route.dashboard") }}
+    <!-- {{ $t("messages.test") }} -->
+    {{$t('route.dashboard')}}
   </div>
 </template>
 
