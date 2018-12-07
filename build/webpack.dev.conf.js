@@ -59,16 +59,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       chunks: ['app']
     }),
     new HtmlWebpackPlugin({
-      filename: 'mobile.html',
-      template: 'src/mobile/mobile.html',
+      filename: 'inlay.html',
+      template: 'inlay.html',
       inject: true,
-      chunks: ['mobile']
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'web.html',
-      template: 'src/web/web.html',
-      inject: true,
-      chunks: ['web']
+      chunks: ['inlay']
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

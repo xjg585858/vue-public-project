@@ -23,8 +23,8 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    web: './src/web/web.js',
-    mobile: './src/mobile/mobile.js'
+    inlay: './src/inlay.js',
+    // mobile: './src/mobile/mobile.js'
 
   },
   externals: {

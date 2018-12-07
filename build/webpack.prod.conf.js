@@ -77,13 +77,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      chunks: ['app','mobile','web']
+      chunks: ['manifest', 'vendor', 'app']
     }),
     new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing'
-        ? 'mobile.html'
-        : config.build.mobile,
-      template: 'src/mobile/mobile.html',
+        ? 'inlay.html'
+        : config.build.inlay,
+      template: 'inlay.html',
       inject: true,
       minify: {
         removeComments: true,
@@ -94,24 +94,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      chunks: ['app','mobile','web']
-    }),
-    new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'web.html'
-        : config.build.web,
-      template: 'src/web/web.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
-      chunks: ['app','mobile','web']
+      chunks: ['manifest', 'vendor', 'inlay']
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
