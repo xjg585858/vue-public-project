@@ -28,7 +28,34 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
-
+// =========
+  // SASS 配置
+  // =========
+function resolveResouce(name) {
+    return path.resolve(__dirname, '../src/assets/scss/' + name);
+}
+function generateSassResourceLoader() {
+    var loaders = [
+      cssLoader, 
+      // 'postcss-loader',
+      'sass-loader',
+      {
+          loader: 'sass-resources-loader',
+          options: {
+            // it need a absolute path
+            resources: [resolveResouce('mixins.scss')]
+          }
+      }
+    ];
+    if (options.extract) {
+      return ExtractTextPlugin.extract({
+        use: loaders,
+        fallback: 'vue-style-loader'
+      })
+    } else {
+      return ['vue-style-loader'].concat(loaders)
+    }
+}
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]

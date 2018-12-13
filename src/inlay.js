@@ -5,8 +5,11 @@ import App from './entry/inlay.vue'
 
 import router from './router/inlay.router'
 import './assets/css/reset.css'
-import i18n from './lang/index'
+import './mobile/css/index.css'
+import i18n from './mobile/lang/index'
+import massage from '@/api/massage'
 /* eslint-disable */
+Vue.use(massage);
 Vue.config.productionTip = false
 new Vue({
   el: '#inlay',

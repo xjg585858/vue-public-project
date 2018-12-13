@@ -1,10 +1,10 @@
 <template>
   <div ref="index" class="inlay-index">
-    <indexHeader></indexHeader>
-    <transition :name="transitionName">
-      <router-view  class="child-view"/>
-    </transition>
-    <FooterBar></FooterBar>
+    <indexHeader>头部</indexHeader>
+    <!-- <transition :name="transitionName"> -->
+    <router-view/>
+    <!-- </transition> -->
+    <FooterBar>底部</FooterBar>
   </div>
 </template>
 
@@ -19,16 +19,16 @@ export default {
   },
   data () {
     return {
-      transitionName: 'slide-left'
+      // transitionName: 'slide-left'
     }
-  },
-  beforeRouteUpdate (to, from, next) {
-    const toDepth = to.path.split('/').length
-    const fromDepth = from.path.split('/').length
-    this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-    document.getElementsByClassName('inlay-index')[0].style.height = document.getElementsByClassName('child-view')[0].clientHeight + 'px'
-    next()
   }
+  // beforeRouteUpdate (to, from, next) {
+  //   const toDepth = to.path.split('/').length
+  //   const fromDepth = from.path.split('/').length
+  //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   document.getElementsByClassName('inlay-index')[0].style.height = document.getElementsByClassName('child-view')[0].clientHeight + 'px'
+  //   next()
+  // }
 }
 </script>
 

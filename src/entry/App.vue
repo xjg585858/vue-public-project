@@ -1,21 +1,22 @@
 <template>
     <div id="app">
-        <el-container>
-            <el-header>
+        <!-- <el-container>
+            <el-header height='60px'>
                 <pcHeader></pcHeader>
             </el-header>
             <el-main>
-                <router-view/>
             </el-main>
-        </el-container>
+            <el-footer>Footer</el-footer>
+        </el-container> -->
+        <router-view/>
     </div>
 </template>
 <script>
-import pcHeader from '../web/component/Header'
+// import pcHeader from '../web/component/Header'
 export default {
   name: 'App',
   components: {
-    pcHeader
+    // pcHeader
   }
 }
 </script>

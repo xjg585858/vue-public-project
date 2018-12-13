@@ -1,0 +1,24 @@
+
+$Header-1-Black: #fff;
+$Header-1-color: #333;
+$Header-1-border: #dcdfe6;
+.theme-black{
+    .el-header{
+        background: $Header-1-Black;
+        padding: 0;
+        color: $Header-1-color;
+        a {
+            color: $Header-1-color
+        }
+        .el-input__inner{
+            background: $Header-1-Black;
+            color: $Header-1-color;
+        }
+        .el-input.is-active .el-input__inner, .el-input__inner:focus{
+            border: 1px solid $Header-1-border
+        }
+        .el-dropdown{
+            color: $Header-1-color;
+        }
+    }
+}
