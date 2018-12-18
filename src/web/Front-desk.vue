@@ -13,14 +13,7 @@
       </el-header>
       <el-main>
         <div class="wrapper">
-            <el-container>
-              <el-main style="padding-top: 0;padding-left: 0">
-                <router-view/>
-              </el-main>
-              <el-aside width="250px">
-                <asideItem></asideItem>
-              </el-aside>
-            </el-container>
+          <router-view/>
         </div>
       </el-main>
       <el-footer>

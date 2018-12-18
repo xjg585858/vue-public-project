@@ -6,9 +6,11 @@ import i18n from './web/lang/index'
 // import Cookies from 'js-cookie'
 import store from './store/index'
 import './assets/css/reset.css'
+import massage from './api/massage'
 import './assets/web/public.scss'
 /* eslint-disable */
 Vue.config.productionTip = false
+Vue.use(massage)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

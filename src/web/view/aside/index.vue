@@ -1,6 +1,6 @@
 <template>
     <div class="aside-item">
-      <router-link :to="{name:'NewPost'}" class="NewPost">新建帖子</router-link>
+      <!-- <a href="javascript:void(0)" @click='mask = !mask' class="NewPost">新建帖子</a> -->
       <div class="aside-item-panel">
         <h3 class="title">小贴上</h3>
         <div class="item-content">
@@ -32,16 +32,20 @@
           <a href="javascript:void(0)" class="help">社区4</a>
         </div>
       </div>
+      <NewPost :mask.sync='mask'></NewPost>
     </div>
 </template>
 <script>
+// import NewPost from '../NewPost'
 export default {
   name: 'item',
   props: ['ModuleContent'],
   components: {
+    // NewPost
   },
   data () {
     return {
+      mask: false
     }
   },
   mounted () {

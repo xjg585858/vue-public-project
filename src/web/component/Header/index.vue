@@ -26,8 +26,13 @@
         </el-col>
         <el-col :span='5'>
             <div class="info">
-                <el-button type="" size="small">{{$t('login.logIn')}}</el-button>
-                <el-button type="danger" size="small">{{$t('registered.registered')}}</el-button>
+                <template v-if="!token">
+                    <el-button type="" @click="logInMask = true" size="small">{{$t('login.logIn')}}</el-button>
+                    <el-button type="danger" size="small">{{$t('registered.registered')}}</el-button>
+                </template>
+                <template v-else>
+                   {{$t('user.username')}}: {{user.account}} <el-button @click="logInOut()" type="danger" size="small">{{$t('user.out')}}</el-button>
+                </template>
             </div>
         </el-col>
         <el-col :span='2'>
@@ -35,23 +40,43 @@
                 <languageComponent></languageComponent>
             </div>
         </el-col>
+        <login :logInMask.sync='logInMask'></login>
     </el-row>
 </template>
 <script>
 import languageComponent from '../language-Component'
+import login from '../logIn'
 export default {
   components: {
-    languageComponent
+    languageComponent,
+    login
   },
   data () {
     return {
-      input5: ''
+      input5: '',
+      logInMask: false
+    }
+  },
+  computed: {
+    token: {
+      get () {
+        return this.$store.state.user.token
+      }
+    },
+    user: {
+      get () {
+        return this.$store.state.user.user
+      }
     }
   },
   mounted () {
-    // console.log(this.$t('logo'))
   },
   methods: {
+    logInOut () {
+      this.$store.dispatch('logInOut').then((req) => {
+        console.log(req)
+      })
+    },
     handleCommand (command) {
     //   this.$message('click on item ' + command)
     }

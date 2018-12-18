@@ -1,9 +1,13 @@
 
-import app from './modules/app'
 /* eslint-disable */
+import app from './modules/app'
+import user from './modules/user'
+import getters from './getters'
 const store = new Vuex.Store({
-    modules: {
-      app,
-    }
-  })
+  modules: {
+    app,
+    user
+  },
+  getters
+})
 export default store

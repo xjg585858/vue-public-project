@@ -2,6 +2,12 @@
 $Header-1-Black: #fff;
 $Header-1-color: #333;
 $Header-1-border: #dcdfe6;
+.el-dialog__header{
+    // padding: 0 10px
+}
+.el-dialog__body{
+    padding-top: 0;
+}
 .theme-black{
     .el-header{
         background: $Header-1-Black;
