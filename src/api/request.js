@@ -8,9 +8,9 @@ const service = axios.create({
   responseType: 'json', // default
   xsrfCookieName: 'XSRF-TOKEN', // default
   xsrfHeaderName: 'X-XSRF-TOKEN', // default
-  baseURL: 'http://localhost:3001',
+  // baseURL: 'http://35.201.180.82',
   withCredentials: true,
-  timeout: 5000 // request timeout
+  timeout: 5000 // request timeoutnpm
 })
 let loadingInstance1
 // request interceptor

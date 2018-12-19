@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         //target: 'http://localhost:50380/',
-          target: 'http://localhost:3001/',
+          target: 'http://35.201.180.82/',
           secure: false,
           // changeOrigin: true,  //是否跨域
           // pathRewrite: {
@@ -56,9 +56,7 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
-    index: path.resolve(__dirname, '../dist/web.html'),
-    index: path.resolve(__dirname, '../dist/mobile.html'),
-
+    inlay: path.resolve(__dirname, '../dist/inlay.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
