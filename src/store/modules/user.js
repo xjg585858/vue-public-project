@@ -1,9 +1,10 @@
 /* eslint-disable */
 import Cookies from 'js-cookie'
-
+import { Loading , Message} from 'element-ui'
 import { login, Obtain, logInOut} from '../../api/Management'
 import * as Type from "../modulesType"
 import { getToken, setToken, removeToken } from '../../utils/auth'
+console.log(getToken())
 const user = {
   state: {
     user:{},
@@ -22,6 +23,7 @@ const user = {
         return new Promise((resolve, reject) => {
             login(value).then((req) => {
                 if (req.status != 'success') {
+                    Message({message: req.data.message, type: 'error', duration: 2 * 1000})
                     reject(req)
                 } else {
                     commit(Type.SET_USERINFO,req.data) // 用户信息
@@ -40,16 +42,18 @@ const user = {
                 Obtain({token: state.token}).then((req) => {
                     if(req.status === 'success') {
                         commit(Type.SET_USERINFO,req.data) // 用户信息
-                        commit(Type.SET_TOKEN, req.data.token) // 设置token
                         setToken(req.data.token)
-                        return resolve(req)
+                        resolve(req)
                     } else {
-                        reject(false)
+                        Message({message: req.data.message, type: 'error', duration: 2 * 1000})
+                        commit(Type.SET_TOKEN, null) // 清除
+                        removeToken() // 清除
+                        reject(req)
                     }
                 }).catch((err) => {
                     commit(Type.SET_TOKEN, null) // 清除
                     removeToken() // 清除
-                    reject(false)
+                    reject(err)
                 })
             })
         }

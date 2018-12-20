@@ -1,5 +1,5 @@
 <template>
-    <router-link @click.native='submit()' :to='{path:"_Details/"+ item.id, params: { item: item }}'>
+    <router-link @click.native='submit(item.id)' :to="{name:'Forum_Details'}">
         <el-row>
             <el-col :span="2">
                 <div class="item-logo item">
@@ -9,9 +9,9 @@
             </el-col>
             <el-col :span="22">
                 <div class="item-content item">
-                    <h2>{{item.title}}</h2>
+                    <h2>{{item.title}} <span style="color: red">{{item.Remarks}}</span></h2>
                     <div class="text col-text">{{item.content}} <el-tag size='mini' v-if="item.Newcomer" type='success'>新人贴</el-tag></div>
-                    <p class="time">发表于 2018-12-15 21:19  最后回复 {{item.replyName + ' ' + item.lastTime}}<span class="Watch"><i class="el-icon-message"></i> {{item.ment}} <i class="el-icon-view"></i> {{item.Views}}</span></p>
+                    <p class="time">发表于 {{item.Time}}  最后回复 {{item.replyName + ' ' + item.lastTime}}<span class="Watch"><i class="el-icon-message"></i> {{item.comments}} <i class="el-icon-view"></i> {{item.Views}}</span></p>
                 </div>
             </el-col>
         </el-row>
@@ -23,7 +23,8 @@ export default{
     item: Object
   },
   methods: {
-    submit () {
+    submit (id) {
+      this.$store.dispatch('SetForumDetailsId', id)
     }
   }
 }

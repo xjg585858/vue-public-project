@@ -42,7 +42,7 @@
     </div>
 </template>
 <script>
-import { ForumMassage, leaveMessage, ForumMassageOnly } from '@/api/Management.js'
+import { ForumDetails, createMessage, FindMessage, leaveMessage, ForumMassageOnly } from '@/api/Management.js'
 import Message from './Message'
 export default{
   components: {
@@ -65,27 +65,37 @@ export default{
   },
   mounted () {
   },
+  computed: {
+    DetailsIdPage: {
+      get () {
+        return this.$store.state.Forum.DetailsIdPage
+      }
+    }
+  },
   created () {
-    this.ForumMassageOnly()
-    this.ForumMassage()
+    this.ForumDetails()
+    this.FindMessage()
+    // this.ForumMessage() // 创建
+    // console.log()
+    // this.ForumMassageOnly()
+    // this.ForumMassage()
   },
   methods: {
     submitForm (formName) {
-      console.log(this.info.ment)
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          let info = await this.$store.dispatch('GetUserInfo')
-          if (info) {
+          let obj = await this.$store.dispatch('GetUserInfo')
             this.ruleForm.id = this.info.id
-            this.ruleForm.replyName = info.data.account
-            this.ruleForm.logoUrl = info.data.logoUrl
-            leaveMessage(this.ruleForm).then((req) => {
-              this.ForumMassage()
-              this.ruleForm.replyMessage = ''
+            this.ruleForm.replyName = obj.data.account
+            this.ruleForm.logoUrl = 'http://www.flw.ph/uc_server/images/noavatar_small.gif'
+            createMessage(this.ruleForm).then((req) => {
+                if (req.status === 'success') {
+                  this.ruleForm.replyMessage = ''
+                  this.FindMessage()
+                }
+            }).catch((err) => {
+              this.$Message(err, 'error')
             })
-          } else {
-            this.$Message('未登录', 'error')
-          }
         } else {
           console.log('error submit!!')
           return false
@@ -95,18 +105,39 @@ export default{
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
+    ForumDetails () { // 获取详情
+      ForumDetails({id: this.DetailsIdPage}).then((req) => {
+        this.info = req.data
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    // createMessage () {
+    //   createMessage({id: this.DetailsIdPage}).then((req) => {
+    //     console.log(req)
+    //   }).catch((err) => {
+    //     console.log(err)
+    //   })
+    // },
+    FindMessage () {
+      FindMessage({id: this.DetailsIdPage}).then((req) => {
+        this.Message = req.data
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
     leaveMessage () {
     },
     ForumMassageOnly () {
-      ForumMassageOnly({id: Number(this.$route.params.id)}).then(async (req) => {
+      ForumMassageOnly({id: Number(this.DetailsIdPage)}).then(async (req) => {
         this.info = req.data
       })
     },
-    ForumMassage (vl) {
-      ForumMassage({id: this.$route.params.id}).then((req) => {
-        this.Message = req.data
-      })
-    },
+    // ForumMassage (vl) {
+    //   ForumMassage({id: this.DetailsIdPage}).then((req) => {
+    //     this.Message = req.data
+    //   })
+    // },
     submit () {
     }
   }

@@ -5,8 +5,8 @@
                 <el-form-item :label="$t('login.username')" prop="account">
                     <el-input type="text" v-model="ruleForm.account" :placeholder="$t('login.Input') + $t('login.username')" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item :label="$t('login.password')" prop="pass">
-                    <el-input type="password" v-model="ruleForm.pass" :placeholder="$t('login.Input') + $t('login.password')" autocomplete="off"></el-input>
+                <el-form-item :label="$t('login.password')" prop="password">
+                    <el-input type="password" v-model="ruleForm.password" :placeholder="$t('login.Input') + $t('login.password')" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('login.code')" prop="code">
                     <el-input type="text" v-model="ruleForm.code" :placeholder="$t('login.Input') + $t('login.code')" autocomplete="off">
@@ -45,7 +45,7 @@ export default{
         callback()
       }
     }
-    var pass = (rule, value, callback) => {
+    var password = (rule, value, callback) => {
       if (value === '') {
         callback(new Error(this.$t('login.Input') + this.$t('login.password')))
       } else {
@@ -62,8 +62,8 @@ export default{
     return {
       visible: this.logInMask,
       ruleForm: {
-        account: 'test0089',
-        pass: 'a123456',
+        account: 'admin',
+        password: '123456',
         code: ''
       },
       Images: '',
@@ -71,8 +71,8 @@ export default{
         account: [
           { validator: account, trigger: 'blur' }
         ],
-        pass: [
-          { validator: pass, trigger: 'blur' }
+        password: [
+          { validator: password, trigger: 'blur' }
         ],
         code: [
           { validator: code, trigger: 'blur' }

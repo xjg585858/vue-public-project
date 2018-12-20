@@ -13,7 +13,9 @@ export default {
   },
   user: {
     out: '退出',
-    username: '账户'
+    username: '账户',
+    amount: '金额',
+    integral: '积分'
   },
   search: '请输入内容',
   login: {

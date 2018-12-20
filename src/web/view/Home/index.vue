@@ -13,7 +13,7 @@
 <script>
 import asideItem from './aside'
 import NewsTemplate from './NewsTemplate'
-import { localNews } from '../../../api/Management.js'
+// import { localNews } from '../../../api/Management.js'
 export default {
   name: 'Home',
   data () {
@@ -36,11 +36,11 @@ export default {
     }
   },
   created () {
-    for (let i = 0; i < this.list.length; i++) {
-      localNews({nation: this.list[i].country}).then((req) => {
-        this.list[i].news = req
-      })
-    }
+    // for (let i = 0; i < this.list.length; i++) {
+    //   localNews({nation: this.list[i].country}).then((req) => {
+    //     this.list[i].news = req
+    //   })
+    // }
   },
   mounted () {
   },

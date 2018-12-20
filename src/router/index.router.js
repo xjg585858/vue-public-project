@@ -42,7 +42,7 @@ const router =  new VueRouter({
               meta: {title: 'Forum', noCache: true ,requiresAuth: false}
             },
             {
-              path: '_Details/:id',
+              path: '_Details',
               name: 'Forum_Details',
               component: Forum_Details,
               // props: true,
@@ -57,7 +57,7 @@ const router =  new VueRouter({
         //   meta: { title: 'NewPost', noCache: true ,requiresAuth: false}
         // },
         {
-          path:'Details/:id',
+          path:'Details',
           name: 'Details',
           component: Details,
           meta: { title: 'Details', noCache: true ,requiresAuth: false}
@@ -74,7 +74,9 @@ const router =  new VueRouter({
 })
 router.beforeEach((to, from, next) => {
   if(store.getters.token){
-    store.dispatch('GetUserInfo').then((req) =>{})
+    store.dispatch('GetUserInfo').then((req) =>{}).catch((err) =>{
+      console.log(err)
+    })
   }
   // getinfo().then((req) => {
   //   console.log(req)

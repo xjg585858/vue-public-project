@@ -1,11 +1,11 @@
 <template>
     <el-row class="main-header">
-        <el-col :span='9'>
+        <el-col :span='8'>
             <div class="logo">
                 <router-link to='/'>{{$t('logo')}}</router-link>
             </div>
         </el-col>
-        <el-col :span='8'>
+        <el-col :span='7'>
             <div class="search">
                 <el-input :placeholder="$t('search')" size="small" v-model="input5" class="input-with-select">
                     <el-button slot="append" icon="el-icon-search"></el-button>
@@ -24,14 +24,14 @@
                 </el-input>
             </div>
         </el-col>
-        <el-col :span='5'>
+        <el-col :span='7'>
             <div class="info">
-                <template v-if="!token">
-                    <el-button type="" @click="logInMask = true" size="small">{{$t('login.logIn')}}</el-button>
-                    <el-button type="danger" size="small">{{$t('registered.registered')}}</el-button>
+                <template v-if="token">
+                   {{$t('user.username')}}: {{user.account}} {{$t('user.amount')}} {{user.money}} {{$t('user.integral')}} {{user.integral}}<el-button @click="logInOut()" type="danger" size="small">{{$t('user.out')}}</el-button>
                 </template>
                 <template v-else>
-                   {{$t('user.username')}}: {{user.account}} <el-button @click="logInOut()" type="danger" size="small">{{$t('user.out')}}</el-button>
+                    <el-button type="" @click="logInMask = true" size="small">{{$t('login.logIn')}}</el-button>
+                    <el-button type="danger" size="small">{{$t('registered.registered')}}</el-button>
                 </template>
             </div>
         </el-col>

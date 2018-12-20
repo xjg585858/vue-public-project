@@ -17,7 +17,9 @@ export default {
   },
   user: {
     out: 'logInOut',
-    username: 'userName'
+    username: 'userName',
+    amount: 'Amount',
+    integral: 'Intergral'
   },
   navbar: {
     home: 'Home',

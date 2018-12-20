@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { Loading } from 'element-ui'
+/* eslint-disable */
+import { Loading , Message} from 'element-ui'
 // import store from '@/store'
 // import { getToken } from '@/utils/auth'
 // create an axios instance
@@ -9,6 +10,7 @@ const service = axios.create({
   xsrfCookieName: 'XSRF-TOKEN', // default
   xsrfHeaderName: 'X-XSRF-TOKEN', // default
   // baseURL: 'http://35.201.180.82',
+  baseURL: 'http://localhost:3001',
   withCredentials: true,
   timeout: 5000 // request timeoutnpm
 })
@@ -33,7 +35,13 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     loadingInstance1.close()
-    return response.data
+    if (response.data.status === 'success') {
+      return response.data
+    } else {
+      Message({message: response.data.message, type: 'error', duration: 2 * 1000})
+      // return response.data
+      return Promise.reject('error')
+    }
   },
   /**
    * 下面的注释为通过在response里，自定义code来标示请求状态

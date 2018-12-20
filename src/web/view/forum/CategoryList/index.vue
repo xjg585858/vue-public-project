@@ -13,7 +13,7 @@
 <script>
 import Country from '@/api/country.js'
 import Forumlist from './ForumList'
-import { ForumNews } from '@/api/Management.js'
+import { ForumAll } from '@/api/Management.js'
 import NewPost from '../NewPost'
 let Countrys = new Country()
 export default {
@@ -25,7 +25,7 @@ export default {
     }
   },
   created () {
-    ForumNews().then((req) => {
+    ForumAll().then((req) => {
       this.ForumArr = req.data
     })
   },

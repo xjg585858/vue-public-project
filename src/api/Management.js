@@ -10,7 +10,7 @@ export function Verification (data) {
 }
 export function Obtain (params) {
   return request({
-    url: 'Obtain/info',
+    url: '/api/Obtain/info',
     method: 'get',
     params
   })
@@ -45,16 +45,40 @@ export function logInOut () { // 退出
     params: { }
   })
 }
-export function localNews (params) { // 退出
+
+export function ForumAll (params) { // 查询所有论坛
   return request({
-    url: '/localNews',
+    url: '/api/ForumAll',
     method: 'get',
     params
   })
 }
-export function ForumNews (params) { // 查询所有论坛
+export function ForumDetails (params) { // 查询论坛详情
   return request({
-    url: '/api/ForumNews',
+    url: '/api/Forum/Details',
+    method: 'get',
+    params
+  })
+}
+
+export function createMessage (params) { // 留言板回复
+  return request({
+    url: '/api/Forum/createMessage',
+    method: 'get',
+    params
+  })
+}
+
+export function FindMessage (params) { // 查询留言板信息
+  return request({
+    url: '/api/Forum/FindMessage',
+    method: 'get',
+    params
+  })
+}
+export function localNews (params) { // 退出
+  return request({
+    url: '/localNews',
     method: 'get',
     params
   })
