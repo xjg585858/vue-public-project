@@ -37,26 +37,23 @@ const user = {
         })
     },
     GetUserInfo({ commit, state }) { // 获取用户信息
-        if(state.token){
-            return new Promise((resolve,reject) => {
-                Obtain({token: state.token}).then((req) => {
-                    if(req.status === 'success') {
-                        commit(Type.SET_USERINFO,req.data) // 用户信息
-                        setToken(req.data.token)
-                        resolve(req)
-                    } else {
-                        Message({message: req.data.message, type: 'error', duration: 2 * 1000})
-                        commit(Type.SET_TOKEN, null) // 清除
-                        removeToken() // 清除
-                        reject(req)
-                    }
-                }).catch((err) => {
+        return new Promise((resolve,reject) => {
+            Obtain().then((req) => {
+                if(req.status === 'success') {
+                    commit(Type.SET_USERINFO,req.data) // 用户信息
+                    setToken(req.data.token)
+                    resolve(req)
+                } else {
                     commit(Type.SET_TOKEN, null) // 清除
                     removeToken() // 清除
-                    reject(err)
-                })
+                    reject(req)
+                }
+            }).catch((err) => {
+                commit(Type.SET_TOKEN, null) // 清除
+                removeToken() // 清除
+                reject(err)
             })
-        }
+        })
     },
     logInOut({ commit, state }) { //退出
         return new Promise((resolve, reject) => {

@@ -21,7 +21,7 @@ export default{
         position: relative
         line-height: 50px
         padding: 0 20px
-        min-width: 80px
+        min-width: 120px
         text-align: center
         color: #828282
     .router-link-active

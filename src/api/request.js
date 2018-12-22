@@ -35,13 +35,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     loadingInstance1.close()
-    if (response.data.status === 'success') {
-      return response.data
-    } else {
-      Message({message: response.data.message, type: 'error', duration: 2 * 1000})
-      // return response.data
-      return Promise.reject('error')
-    }
+    // if (response.data.status === 'success') {
+    return response.data
+    // } else {
+    //   Message({message: response.data.message, type: 'error', duration: 2 * 1000})
+    //   return Promise.reject('error')
+    // }
   },
   /**
    * 下面的注释为通过在response里，自定义code来标示请求状态

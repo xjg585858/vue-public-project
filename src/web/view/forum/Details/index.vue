@@ -13,7 +13,7 @@
                 <div class="Forum-Details-wrapper">
                     <div class="header">
                         <h1>{{info.title}}</h1>
-                        <p class="time">{{info.Time}} <i class="el-icon-message"></i>{{info.ment}} <i class="el-icon-view"></i>{{info.Views}}</p>
+                        <p class="time">{{info.Time}} <i class="el-icon-message"></i>{{info.comments}} <i class="el-icon-view"></i>{{info.Views}}</p>
                     </div>
                     <div class="body">
                         {{info.content}}
@@ -42,7 +42,7 @@
     </div>
 </template>
 <script>
-import { ForumDetails, createMessage, FindMessage, leaveMessage, ForumMassageOnly } from '@/api/Management.js'
+import { ForumDetails, createMessage, FindMessage } from '@/api/Management.js'
 import Message from './Message'
 export default{
   components: {
@@ -70,32 +70,42 @@ export default{
       get () {
         return this.$store.state.Forum.DetailsIdPage
       }
+    },
+    token: {
+      get () {
+        return this.$store.state.user.token
+      }
     }
   },
   created () {
     this.ForumDetails()
     this.FindMessage()
-    // this.ForumMessage() // 创建
-    // console.log()
-    // this.ForumMassageOnly()
-    // this.ForumMassage()
   },
   methods: {
     submitForm (formName) {
-      this.$refs[formName].validate(async (valid) => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          let obj = await this.$store.dispatch('GetUserInfo')
-            this.ruleForm.id = this.info.id
-            this.ruleForm.replyName = obj.data.account
-            this.ruleForm.logoUrl = 'http://www.flw.ph/uc_server/images/noavatar_small.gif'
-            createMessage(this.ruleForm).then((req) => {
+          this.$store.dispatch('GetUserInfo').then((objs) => {
+            if (objs.status === 'success') {
+              this.ruleForm.id = this.info.id
+              this.ruleForm.replyName = objs.data.account
+              this.ruleForm.replylogoUrl = objs.data.replylogoUrl || 'http://www.flw.ph/uc_server/images/noavatar_small.gif'
+              createMessage(this.ruleForm).then((req) => {
                 if (req.status === 'success') {
                   this.ruleForm.replyMessage = ''
                   this.FindMessage()
+                  this.ForumDetails()
+                  this.$store.dispatch('GetUserInfo')
+                } else {
+                  this.$Message(req.message, 'error')
                 }
-            }).catch((err) => {
-              this.$Message(err, 'error')
-            })
+              })
+            } else {
+              this.$Message(objs.message, 'error')
+            }
+          }).catch((objs) => {
+            this.$Message(objs.message, 'error')
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -112,13 +122,6 @@ export default{
         console.log(err)
       })
     },
-    // createMessage () {
-    //   createMessage({id: this.DetailsIdPage}).then((req) => {
-    //     console.log(req)
-    //   }).catch((err) => {
-    //     console.log(err)
-    //   })
-    // },
     FindMessage () {
       FindMessage({id: this.DetailsIdPage}).then((req) => {
         this.Message = req.data
@@ -126,18 +129,6 @@ export default{
         console.log(err)
       })
     },
-    leaveMessage () {
-    },
-    ForumMassageOnly () {
-      ForumMassageOnly({id: Number(this.DetailsIdPage)}).then(async (req) => {
-        this.info = req.data
-      })
-    },
-    // ForumMassage (vl) {
-    //   ForumMassage({id: this.DetailsIdPage}).then((req) => {
-    //     this.Message = req.data
-    //   })
-    // },
     submit () {
     }
   }

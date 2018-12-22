@@ -61,6 +61,13 @@ export function ForumDetails (params) { // 查询论坛详情
   })
 }
 
+export function createForum (params) { // 留言板回复
+  return request({
+    url: '/api/createForum',
+    method: 'get',
+    params
+  })
+}
 export function createMessage (params) { // 留言板回复
   return request({
     url: '/api/Forum/createMessage',
@@ -76,6 +83,7 @@ export function FindMessage (params) { // 查询留言板信息
     params
   })
 }
+
 export function localNews (params) { // 退出
   return request({
     url: '/localNews',

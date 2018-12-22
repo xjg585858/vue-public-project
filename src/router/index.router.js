@@ -73,11 +73,11 @@ const router =  new VueRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if(store.getters.token){
-    store.dispatch('GetUserInfo').then((req) =>{}).catch((err) =>{
-      console.log(err)
-    })
-  }
+  store.dispatch('GetUserInfo').then((req) =>{
+    console.log(req)
+  }).catch((err) =>{
+    console.log(err)
+  })
   // getinfo().then((req) => {
   //   console.log(req)
   // })

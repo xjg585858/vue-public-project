@@ -14,7 +14,7 @@
 import Country from '@/api/country.js'
 import Forumlist from './ForumList'
 import { ForumAll } from '@/api/Management.js'
-import NewPost from '../NewPost'
+import NewPost from './NewPost'
 let Countrys = new Country()
 export default {
   data () {
@@ -25,9 +25,14 @@ export default {
     }
   },
   created () {
-    ForumAll().then((req) => {
-      this.ForumArr = req.data
-    })
+    this.ForumAll()
+  },
+  methods: {
+    ForumAll () {
+      ForumAll().then((req) => {
+        this.ForumArr = req.data
+      })
+    }
   },
   components: {
     Forumlist,
